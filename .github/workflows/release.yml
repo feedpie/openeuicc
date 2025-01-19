@@ -1,4 +1,4 @@
-name: Build APKs without Keystore
+name: Build APKs
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
       image: mcr.microsoft.com/playwright:focal
 
     steps:
-      - name: Fix Permissions
+      - name: Fix Permissions and Install Dependencies
         run: |
           apt update && apt upgrade -y
           apt install -y unzip openjdk-17-jdk
@@ -23,18 +23,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 33
-          build-tools: 33.0.2
-          ndk-version: 25.1.8937393
+      - name: Mark Repository as Safe
+        run: |
+          git config --global --add safe.directory /__w/openeuicc/openeuicc
 
       - name: Build Debug APK
         run: |
