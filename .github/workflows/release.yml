@@ -36,30 +36,13 @@ jobs:
             -storepass ${{ secrets.STORE_PASSWORD }} \
             -keypass ${{ secrets.KEY_PASSWORD }} \
             -alias ${{ secrets.KEY_ALIAS }} \
-            -dname "CN=OpenEUICC, OU=Development, O=Example, L=City, S=State, C=US"
-
-      - name: Ensure keystore.properties Exists
-        run: |
-          echo "Ensuring keystore.properties exists..."
-          if [ ! -f "$GITHUB_WORKSPACE/keystore.properties" ]; then
-            echo "storePassword=${{ secrets.STORE_PASSWORD }}" > $GITHUB_WORKSPACE/keystore.properties
-            echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> $GITHUB_WORKSPACE/keystore.properties
-            echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> $GITHUB_WORKSPACE/keystore.properties
-            echo "storeFile=$GITHUB_WORKSPACE/keystore.jks" >> $GITHUB_WORKSPACE/keystore.properties
-          fi
+            -dname "CN=OpenEUICC\,OU=Development\,O=Example\,L=City\,S=State\,C=US"
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: 33
-          build-tools: 33.0.2
-          ndk-version: 25.1.8937393
 
       - name: Build Release APK
         run: |
