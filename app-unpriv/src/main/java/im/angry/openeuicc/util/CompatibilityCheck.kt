@@ -129,7 +129,7 @@ internal class OmapiConnCheck(private val context: Context): CompatibilityCheck(
 
 internal class IsdrChannelAccessCheck(private val context: Context): CompatibilityCheck(context) {
     companion object {
-        val ISDR_AID = "A0000005591010FFFFFFFF8900000100".decodeHex()
+        val ISDR_AID = "A0000005591010FFFFFFFF8900050500".decodeHex()
     }
 
     override val title: String
