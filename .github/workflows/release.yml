@@ -28,7 +28,7 @@ jobs:
       - name: Generate Keystore File
         run: |
           echo "Generating keystore..."
-          keytool -genkey -v \
+          keytool -genkeypair \
             -keystore $GITHUB_WORKSPACE/keystore.jks \
             -keyalg RSA \
             -keysize 2048 \
@@ -36,7 +36,7 @@ jobs:
             -storepass ${{ secrets.STORE_PASSWORD }} \
             -keypass ${{ secrets.KEY_PASSWORD }} \
             -alias ${{ secrets.KEY_ALIAS }} \
-            -dname "CN=OpenEUICC,OU=Development,O=Example,L=City,S=State,C=US"
+            -dname "CN=OpenEUICC, OU=Development, O=Example, L=City, S=State, C=US"
 
       - name: Ensure keystore.properties Exists
         run: |
